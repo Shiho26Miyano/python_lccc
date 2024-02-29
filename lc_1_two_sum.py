@@ -24,3 +24,4 @@ if __name__ == "__main__":
     
     # Print the result
     print(f"Indices of the two numbers that add up to {target}: {result}")
+
