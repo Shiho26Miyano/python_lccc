@@ -10,9 +10,7 @@ class Solution:
             count[value] = index
             output = max(output, index - pos)
         return output
-    
-
-    
+        
     # deque o(n) o(n) 
     def lengthOfLongestSubstring2(self, s: str) -> int:
         res = 0
