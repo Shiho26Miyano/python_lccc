@@ -31,7 +31,7 @@ class Solution:
     
     # center expansion technique
     # o(n2), o(1)
-    def longestPalindrome2(self, s: str) -> str:
+    def longestPalindrome_2(self, s: str) -> str:
         start, end = 0, 0
 
         for i in range(len(s)):
