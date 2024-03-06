@@ -1,7 +1,37 @@
 class Solution:
+    # Manacher's Algorithm
+    # o(n), o(n)
+    def longestPalindrome(self, s: str) -> str:
+        s_prime = '#' + '#'.join(s) + '#'
+        n = len(s_prime)
+        palindrome_radii = [0] * n
+        center = radius = 0
+        
+        for i in range(n):
+            mirror = 2 * center - i
+
+            if i < radius:
+                palindrome_radii[i] = min(radius - i, palindrome_radii[mirror])
+
+            while (i + 1 + palindrome_radii[i] < n and 
+                   i - 1 - palindrome_radii[i] >= 0 and
+                   s_prime[i + 1 + palindrome_radii[i]] == s_prime[i - 1 - palindrome_radii[i]]):
+                palindrome_radii[i] += 1
+
+            if i + palindrome_radii[i] > radius:
+                center = i
+                radius = i + palindrome_radii[i]
+
+        max_length = max(palindrome_radii)
+        center_index = palindrome_radii.index(max_length)
+        start_index = (center_index - max_length) // 2
+        longest_palindrome = s[start_index: start_index + max_length]
+
+        return longest_palindrome
+    
     # center expansion technique
     # o(n2), o(1)
-    def longestPalindrome(self, s: str) -> str:
+    def longestPalindrome2(self, s: str) -> str:
         start, end = 0, 0
 
         for i in range(len(s)):
@@ -16,38 +46,11 @@ class Solution:
             while left >= 0 and right < len(s) and s[left] == s[right]:
                 left -= 1
                 right += 1
-
-            # Adjust left index because we moved one step too far in the last loop
             left += 1
 
             if end - start < right - left:
                 start, end = left, right
 
-        # Python's slicing includes the start index and excludes the end index, similar to Java's substring
         return s[start:end]
     
-    # sliding window
-    # o(n2), o(1)
-    def longestPalindrome2(self, s: str) -> str:
-        if not s:
-            return ""
-
-        def expandAroundCenter(left: int, right: int) -> str:
-            while left >= 0 and right < len(s) and s[left] == s[right]:
-                left -= 1
-                right += 1
-            return s[left+1:right]
-
-        longest = ""
-        for i in range(len(s)):
-            # Odd length palindromes (expand around one center)
-            odd_pal = expandAroundCenter(i, i)
-            if len(odd_pal) > len(longest):
-                longest = odd_pal
-
-            # Even length palindromes (expand around two centers)
-            even_pal = expandAroundCenter(i, i+1)
-            if len(even_pal) > len(longest):
-                longest = even_pal
-
-        return longest
+   
