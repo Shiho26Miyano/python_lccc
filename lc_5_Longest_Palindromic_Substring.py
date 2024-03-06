@@ -1,4 +1,5 @@
 class Solution:
+    # o(n2), o(1)
     def longestPalindrome(self, s: str) -> str:
         start, end = 0, 0
 
