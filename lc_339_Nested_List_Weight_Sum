@@ -21,7 +21,7 @@ class Solution:
         total = 0
 
         while len(queue) > 0:
-            for i in range(len(queue)):
+            for i in range(len(queue)): ## init 1st level of depth, len(queue before any change)
                 nested = queue.pop()
                 if nested.isInteger():
                     total += nested.getInteger() * depth
