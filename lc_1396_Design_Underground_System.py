@@ -20,7 +20,6 @@ class UndergroundSystem:
         # The average is simply the total divided by the number of trips.
         return total_time / total_trips
 
-
 # Your UndergroundSystem object will be instantiated and called as such:
 # obj = UndergroundSystem()
 # obj.checkIn(id,stationName,t)
