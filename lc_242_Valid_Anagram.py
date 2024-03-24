@@ -1,5 +1,6 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
+        ##defaultdict provides default value for non existing key with the value returned by the factory fucntion int->0 
         map = defaultdict(int)
         for w in s:
             map[w] +=1 
